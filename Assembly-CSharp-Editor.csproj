@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets/PROMETEO - Car Controller/Editor/PrometeoEditor.cs" />
+     <Compile Include="Assets/PROMETEO - Car Controller/Editor/AIEditor.cs" />
     <Reference Include="UnityEngine">
         <HintPath>/home/kilian/external/Unity/2021.3.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

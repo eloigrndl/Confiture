@@ -358,6 +358,7 @@
 -r:"Library/Bee/artifacts/2400b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/2400b0aE.dag/UnityEngine.TestRunner.ref.dll"
 -r:"Library/Bee/artifacts/2400b0aE.dag/UnityEngine.UI.ref.dll"
+"Assets/PROMETEO - Car Controller/Editor/AIEditor.cs"
 "Assets/PROMETEO - Car Controller/Editor/PrometeoEditor.cs"
 -langversion:9.0
 

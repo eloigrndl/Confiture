@@ -343,9 +343,9 @@
 -r:"Library/Bee/artifacts/2400b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/2400b0aE.dag/UnityEngine.UI.ref.dll"
 "Assets/GenerateFloor.cs"
+"Assets/PROMETEO - Car Controller/Scripts/AICarController.cs"
 "Assets/PROMETEO - Car Controller/Scripts/CameraFollow.cs"
 "Assets/PROMETEO - Car Controller/Scripts/PrometeoCarController.cs"
-"Assets/PROMETEO - Car Controller/Scripts/PrometeoTouchInput.cs"
 -langversion:9.0
 
 /deterministic

@@ -37,7 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets/PROMETEO - Car Controller/Scripts/CameraFollow.cs" />
-     <Compile Include="Assets/PROMETEO - Car Controller/Scripts/PrometeoTouchInput.cs" />
+     <Compile Include="Assets/PROMETEO - Car Controller/Scripts/AICarController.cs" />
      <Compile Include="Assets/GenerateFloor.cs" />
      <Compile Include="Assets/PROMETEO - Car Controller/Scripts/PrometeoCarController.cs" />
      <None Include="Assets/PROMETEO - Car Controller/Fonts/Licence.txt" />
