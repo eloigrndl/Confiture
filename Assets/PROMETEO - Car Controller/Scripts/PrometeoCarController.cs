@@ -22,11 +22,11 @@ public class PrometeoCarController : MonoBehaviour
       [Space(20)]
       //[Header("CAR SETUP")]
       [Space(10)]
-      [Range(20, 190)]
+      [Range(20, 300)]
       public int maxSpeed = 90; //The maximum speed that the car can reach in km/h.
       [Range(10, 120)]
       public int maxReverseSpeed = 45; //The maximum speed that the car can reach while going on reverse in km/h.
-      [Range(1, 10)]
+      [Range(1, 30)]
       public int accelerationMultiplier = 2; // How fast the car can accelerate. 1 is a slow acceleration and 10 is the fastest.
       [Space(10)]
       [Range(10, 45)]
@@ -40,6 +40,8 @@ public class PrometeoCarController : MonoBehaviour
       public int decelerationMultiplier = 2; // How fast the car decelerates when the user is not using the throttle.
       [Range(1, 10)]
       public int handbrakeDriftMultiplier = 5; // How much grip the car loses when the user hit the handbrake.
+      [Range(1f, 10f)]
+      public float driftStart = 3f; // When does the car starts to drift.
       [Space(10)]
       public Vector3 bodyMassCenter; // This is a vector that contains the center of mass of the car. I recommend to set this value
                                     // in the points x = 0 and z = 0 of your car. You can select the value that you want in the y axis,
@@ -104,24 +106,6 @@ public class PrometeoCarController : MonoBehaviour
       public AudioSource tireScreechSound; // This variable stores the sound of the tire screech (when the car is drifting).
       float initialCarEngineSoundPitch; // Used to store the initial pitch of the car engine sound.
 
-    //CONTROLS
-
-      [Space(20)]
-      //[Header("CONTROLS")]
-      [Space(10)]
-      //The following variables lets you to set up touch controls for mobile devices.
-      public bool useTouchControls = false;
-      public GameObject throttleButton;
-      PrometeoTouchInput throttlePTI;
-      public GameObject reverseButton;
-      PrometeoTouchInput reversePTI;
-      public GameObject turnRightButton;
-      PrometeoTouchInput turnRightPTI;
-      public GameObject turnLeftButton;
-      PrometeoTouchInput turnLeftPTI;
-      public GameObject handbrakeButton;
-      PrometeoTouchInput handbrakePTI;
-
     //CAR DATA
 
       [HideInInspector]
@@ -143,7 +127,6 @@ public class PrometeoCarController : MonoBehaviour
       float localVelocityZ;
       float localVelocityX;
       bool deceleratingCar;
-      bool touchControlsSetup = false;
       /*
       The following variables are used to store information about sideways friction of the wheels (such as
       extremumSlip,extremumValue, asymptoteSlip, asymptoteValue and stiffness). We change this values to
@@ -241,25 +224,6 @@ public class PrometeoCarController : MonoBehaviour
           }
         }
 
-        if(useTouchControls){
-          if(throttleButton != null && reverseButton != null &&
-          turnRightButton != null && turnLeftButton != null
-          && handbrakeButton != null){
-
-            throttlePTI = throttleButton.GetComponent<PrometeoTouchInput>();
-            reversePTI = reverseButton.GetComponent<PrometeoTouchInput>();
-            turnLeftPTI = turnLeftButton.GetComponent<PrometeoTouchInput>();
-            turnRightPTI = turnRightButton.GetComponent<PrometeoTouchInput>();
-            handbrakePTI = handbrakeButton.GetComponent<PrometeoTouchInput>();
-            touchControlsSetup = true;
-
-          }else{
-            String ex = "Touch controls are not completely set up. You must drag and drop your scene buttons in the" +
-            " PrometeoCarController component.";
-            Debug.LogWarning(ex);
-          }
-        }
-
     }
 
     // Update is called once per frame
@@ -287,47 +251,7 @@ public class PrometeoCarController : MonoBehaviour
       In this part of the code we specify what the car needs to do if the user presses W (throttle), S (reverse),
       A (turn left), D (turn right) or Space bar (handbrake).
       */
-      if (useTouchControls && touchControlsSetup){
-
-        if(throttlePTI.buttonPressed){
-          CancelInvoke("DecelerateCar");
-          deceleratingCar = false;
-          GoForward();
-        }
-        if(reversePTI.buttonPressed){
-          CancelInvoke("DecelerateCar");
-          deceleratingCar = false;
-          GoReverse();
-        }
-
-        if(turnLeftPTI.buttonPressed){
-          TurnLeft();
-        }
-        if(turnRightPTI.buttonPressed){
-          TurnRight();
-        }
-        if(handbrakePTI.buttonPressed){
-          CancelInvoke("DecelerateCar");
-          deceleratingCar = false;
-          Handbrake();
-        }
-        if(!handbrakePTI.buttonPressed){
-          RecoverTraction();
-        }
-        if((!throttlePTI.buttonPressed && !reversePTI.buttonPressed)){
-          ThrottleOff();
-        }
-        if((!reversePTI.buttonPressed && !throttlePTI.buttonPressed) && !handbrakePTI.buttonPressed && !deceleratingCar){
-          InvokeRepeating("DecelerateCar", 0f, 0.1f);
-          deceleratingCar = true;
-        }
-        if(!turnLeftPTI.buttonPressed && !turnRightPTI.buttonPressed && steeringAxis != 0f){
-          ResetSteeringAngle();
-        }
-
-      }else{
-
-        if(Input.GetKey(KeyCode.W)){
+      if(Input.GetKey(KeyCode.W)){
           CancelInvoke("DecelerateCar");
           deceleratingCar = false;
           GoForward();
@@ -362,9 +286,6 @@ public class PrometeoCarController : MonoBehaviour
         if(!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && steeringAxis != 0f){
           ResetSteeringAngle();
         }
-
-      }
-
 
       // We call the method AnimateWheelMeshes() in order to match the wheel collider movements with the 3D meshes of the wheels.
       AnimateWheelMeshes();
@@ -499,7 +420,7 @@ public class PrometeoCarController : MonoBehaviour
     public void GoForward(){
       //If the forces aplied to the rigidbody in the 'x' asis are greater than
       //3f, it means that the car is losing traction, then the car will start emitting particle systems.
-      if(Mathf.Abs(localVelocityX) > 2.5f){
+      if(Mathf.Abs(localVelocityX) > driftStart){
         isDrifting = true;
         DriftCarPS();
       }else{
@@ -543,7 +464,7 @@ public class PrometeoCarController : MonoBehaviour
     public void GoReverse(){
       //If the forces aplied to the rigidbody in the 'x' asis are greater than
       //3f, it means that the car is losing traction, then the car will start emitting particle systems.
-      if(Mathf.Abs(localVelocityX) > 2.5f){
+      if(Mathf.Abs(localVelocityX) > driftStart){
         isDrifting = true;
         DriftCarPS();
       }else{
@@ -595,7 +516,7 @@ public class PrometeoCarController : MonoBehaviour
     // 1 is the slowest and 10 is the fastest deceleration. This method is called by the function InvokeRepeating,
     // usually every 0.1f when the user is not pressing W (throttle), S (reverse) or Space bar (handbrake).
     public void DecelerateCar(){
-      if(Mathf.Abs(localVelocityX) > 2.5f){
+      if(Mathf.Abs(localVelocityX) > driftStart){
         isDrifting = true;
         DriftCarPS();
       }else{
@@ -654,7 +575,7 @@ public class PrometeoCarController : MonoBehaviour
       }
       //If the forces aplied to the rigidbody in the 'x' asis are greater than
       //3f, it means that the car lost its traction, then the car will start emitting particle systems.
-      if(Mathf.Abs(localVelocityX) > 2.5f){
+      if(Mathf.Abs(localVelocityX) > driftStart){
         isDrifting = true;
       }else{
         isDrifting = false;

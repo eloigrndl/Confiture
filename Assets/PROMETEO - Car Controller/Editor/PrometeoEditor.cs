@@ -24,6 +24,7 @@ public class PrometeoEditor : Editor{
   private SerializedProperty brakeForce;
   private SerializedProperty decelerationMultiplier;
   private SerializedProperty handbrakeDriftMultiplier;
+  private SerializedProperty driftStart;
   private SerializedProperty bodyMassCenter;
   //
   //
@@ -63,17 +64,6 @@ public class PrometeoEditor : Editor{
   private SerializedProperty useSounds;
   private SerializedProperty carEngineSound;
   private SerializedProperty tireScreechSound;
-  //
-  //
-  //TOUCH CONTROLS VARIABLES
-  //
-  //
-  private SerializedProperty useTouchControls;
-  private SerializedProperty throttleButton;
-  private SerializedProperty reverseButton;
-  private SerializedProperty turnRightButton;
-  private SerializedProperty turnLeftButton;
-  private SerializedProperty handbrakeButton;
 
   private void OnEnable(){
     prometeo = (PrometeoCarController)target;
@@ -87,6 +77,7 @@ public class PrometeoEditor : Editor{
     brakeForce = SO.FindProperty("brakeForce");
     decelerationMultiplier = SO.FindProperty("decelerationMultiplier");
     handbrakeDriftMultiplier = SO.FindProperty("handbrakeDriftMultiplier");
+    driftStart = SO.FindProperty("driftStart");
     bodyMassCenter = SO.FindProperty("bodyMassCenter");
 
     frontLeftMesh = SO.FindProperty("frontLeftMesh");
@@ -111,13 +102,6 @@ public class PrometeoEditor : Editor{
     carEngineSound = SO.FindProperty("carEngineSound");
     tireScreechSound = SO.FindProperty("tireScreechSound");
 
-    useTouchControls = SO.FindProperty("useTouchControls");
-    throttleButton = SO.FindProperty("throttleButton");
-    reverseButton = SO.FindProperty("reverseButton");
-    turnRightButton = SO.FindProperty("turnRightButton");
-    turnLeftButton = SO.FindProperty("turnLeftButton");
-    handbrakeButton = SO.FindProperty("handbrakeButton");
-
   }
 
   public override void OnInspectorGUI(){
@@ -133,14 +117,15 @@ public class PrometeoEditor : Editor{
     //
     //
     //
-    maxSpeed.intValue = EditorGUILayout.IntSlider("Max Speed:", maxSpeed.intValue, 20, 190);
+    maxSpeed.intValue = EditorGUILayout.IntSlider("Max Speed:", maxSpeed.intValue, 20, 300);
     maxReverseSpeed.intValue = EditorGUILayout.IntSlider("Max Reverse Speed:", maxReverseSpeed.intValue, 10, 120);
-    accelerationMultiplier.intValue = EditorGUILayout.IntSlider("Acceleration Multiplier:", accelerationMultiplier.intValue, 1, 10);
+    accelerationMultiplier.intValue = EditorGUILayout.IntSlider("Acceleration Multiplier:", accelerationMultiplier.intValue, 1, 30);
     maxSteeringAngle.intValue = EditorGUILayout.IntSlider("Max Steering Angle:", maxSteeringAngle.intValue, 10, 45);
     steeringSpeed.floatValue = EditorGUILayout.Slider("Steering Speed:", steeringSpeed.floatValue, 0.1f, 1f);
     brakeForce.intValue = EditorGUILayout.IntSlider("Brake Force:", brakeForce.intValue, 100, 600);
     decelerationMultiplier.intValue = EditorGUILayout.IntSlider("Deceleration Multiplier:", decelerationMultiplier.intValue, 1, 10);
     handbrakeDriftMultiplier.intValue = EditorGUILayout.IntSlider("Drift Multiplier:", handbrakeDriftMultiplier.intValue, 1, 10);
+    driftStart.floatValue = EditorGUILayout.Slider("Drift Start:", driftStart.floatValue, 1f, 10f);
     EditorGUILayout.PropertyField(bodyMassCenter, new GUIContent("Mass Center of Car: "));
 
     //
@@ -218,27 +203,6 @@ public class PrometeoEditor : Editor{
 
         EditorGUILayout.PropertyField(carEngineSound, new GUIContent("Car Engine Sound: "));
         EditorGUILayout.PropertyField(tireScreechSound, new GUIContent("Tire Screech Sound: "));
-
-    EditorGUILayout.EndToggleGroup();
-
-    //
-    //
-    //TOUCH CONTROLS
-    //
-    //
-
-    GUILayout.Space(25);
-    GUILayout.Label("TOUCH CONTROLS", EditorStyles.boldLabel);
-    GUILayout.Space(10);
-
-    useTouchControls.boolValue = EditorGUILayout.BeginToggleGroup("Use touch controls (mobile devices)?", useTouchControls.boolValue);
-    GUILayout.Space(10);
-
-        EditorGUILayout.PropertyField(throttleButton, new GUIContent("Throttle Button: "));
-        EditorGUILayout.PropertyField(reverseButton, new GUIContent("Brakes/Reverse Button: "));
-        EditorGUILayout.PropertyField(turnLeftButton, new GUIContent("Turn Left Button: "));
-        EditorGUILayout.PropertyField(turnRightButton, new GUIContent("Turn Right Button: "));
-        EditorGUILayout.PropertyField(handbrakeButton, new GUIContent("Handbrake Button: "));
 
     EditorGUILayout.EndToggleGroup();
 
