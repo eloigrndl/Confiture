@@ -240,7 +240,7 @@ public class AICarController : MonoBehaviour
             RRWTireSkid.emitting = false;
           }
         }
-      life = Random.Range(20,60);
+      life = Random.Range(10,30);
     }
 
     bool inCollision = false;

@@ -236,7 +236,7 @@ public class PrometeoCarController : MonoBehaviour
     private void OnCollisionEnter(Collision other) {
       if (!inCollision) {
         inCollision = true;
-        life-=1;
+        life-=carSpeedText/10;
         if (life<=0) {
           Debug.Log("GAME OVER");
         }
