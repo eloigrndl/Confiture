@@ -37,7 +37,7 @@ public class PauseMenu : MonoBehaviour
 
         double distance = Math.Pow(winPoint.transform.position.y - pos.y, 2) + Math.Pow(winPoint.transform.position.x - pos.x, 2) + Math.Pow(winPoint.transform.position.z - pos.z, 2);
         Debug.Log(distance);
-        if(distance <= 400){
+        if(distance <= 200){
             Debug.Log("Game won");
             Time.timeScale = 0f;
             winningScreen.SetActive(true); 

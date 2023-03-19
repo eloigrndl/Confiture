@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -219,7 +219,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &43573112
 MonoBehaviour:
@@ -12299,7 +12299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AICar: {fileID: 235774758}
   player: {fileID: 1683777766}
-  amountCars: 0
+  amountCars: 200
   AICars: []
 --- !u!1 &1849234900
 GameObject:
