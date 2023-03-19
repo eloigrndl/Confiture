@@ -19,6 +19,12 @@ public class AIEditor : Editor{
   private SerializedProperty player;
   //
   //
+  //EXPLOSION
+  //
+  //
+  private SerializedProperty explosion;
+  //
+  //
   //CAR SETUP
   //
   //
@@ -31,6 +37,10 @@ public class AIEditor : Editor{
   private SerializedProperty decelerationMultiplier;
   private SerializedProperty handbrakeDriftMultiplier;
   private SerializedProperty driftStart;
+  public SerializedProperty turnThreshold;
+  public SerializedProperty overturn;
+  public SerializedProperty rayRange;
+  public SerializedProperty targetSpeed;
   private SerializedProperty bodyMassCenter;
   //
   //
@@ -76,6 +86,7 @@ public class AIEditor : Editor{
     SO = new SerializedObject(target);
 
     player = SO.FindProperty("player");
+    explosion = SO.FindProperty("explosion");
 
     maxSpeed = SO.FindProperty("maxSpeed");
     maxReverseSpeed = SO.FindProperty("maxReverseSpeed");
@@ -86,6 +97,10 @@ public class AIEditor : Editor{
     decelerationMultiplier = SO.FindProperty("decelerationMultiplier");
     handbrakeDriftMultiplier = SO.FindProperty("handbrakeDriftMultiplier");
     driftStart = SO.FindProperty("driftStart");
+    turnThreshold = SO.FindProperty("turnThreshold");
+    overturn = SO.FindProperty("overturn");
+    rayRange = SO.FindProperty("rayRange");
+    targetSpeed = SO.FindProperty("targetSpeed");
     bodyMassCenter = SO.FindProperty("bodyMassCenter");
 
     frontLeftMesh = SO.FindProperty("frontLeftMesh");
@@ -123,6 +138,7 @@ public class AIEditor : Editor{
     //
     //
     EditorGUILayout.PropertyField(player, new GUIContent("Player: "));
+    EditorGUILayout.PropertyField(explosion, new GUIContent("Explosion : "));
 
     GUILayout.Space(25);
     GUILayout.Label("CAR SETUP", EditorStyles.boldLabel);
@@ -143,6 +159,10 @@ public class AIEditor : Editor{
     decelerationMultiplier.intValue = EditorGUILayout.IntSlider("Deceleration Multiplier:", decelerationMultiplier.intValue, 1, 10);
     handbrakeDriftMultiplier.intValue = EditorGUILayout.IntSlider("Drift Multiplier:", handbrakeDriftMultiplier.intValue, 1, 10);
     driftStart.floatValue = EditorGUILayout.Slider("Drift Start:", driftStart.floatValue, 1f, 10f);
+    turnThreshold.floatValue = EditorGUILayout.Slider("Turn Threshold : ", turnThreshold.floatValue,5f,40f);
+    overturn.floatValue = EditorGUILayout.Slider("Overturn Angle : ", overturn.floatValue,0.01f,0.25f);
+    rayRange.floatValue = EditorGUILayout.Slider("Ray Range : ",rayRange.floatValue,10f,50f);
+    targetSpeed.floatValue = EditorGUILayout.Slider("Target Speed : ",targetSpeed.floatValue,50f,120f);
     EditorGUILayout.PropertyField(bodyMassCenter, new GUIContent("Mass Center of Car: "));
 
     //

@@ -21,6 +21,10 @@ public class AICarController : MonoBehaviour
       [Space(20)]
       public GameObject player;
 
+    //EXPLOSION
+      [Space(20)]
+      public ParticleSystem explosion;
+
     //CAR SETUP
 
       [Space(20)]
@@ -46,6 +50,14 @@ public class AICarController : MonoBehaviour
       public int handbrakeDriftMultiplier = 5; // How much grip the car loses when the user hit the handbrake.
       [Range(1f, 10f)]
       public float driftStart = 3f; // When does the car starts to drift.
+      [Range(5f, 40f)]
+      public float turnThreshold = 30f; // Angle at which AI car starts to turn towards target.
+      [Range(0.01f, 0.25f)]
+      public float overturn = 0.15f; // Side angle from which car stop moving while it is turning.
+      [Range(10f, 50f)]
+      public float rayRange =  30f; // Range of rays sent from AI car.
+      [Range(50f, 120f)]
+      public float targetSpeed = 80f; // Target speed of AI car.
       [Space(10)]
       public Vector3 bodyMassCenter; // This is a vector that contains the center of mass of the car. I recommend to set this value
                                     // in the points x = 0 and z = 0 of your car. You can select the value that you want in the y axis,
@@ -229,11 +241,25 @@ public class AICarController : MonoBehaviour
         }
 
     }
-    
-    float turnThreshold = 30f;
-    float overturn = 0.15f;
-    float rayRange =  30f;
-    float targetSpeed = 80f;
+
+    bool inCollision = false;
+    int life = 5;
+    private void OnCollisionEnter(Collision other) {
+      if (!inCollision) {
+        inCollision = true;
+        life-=1;
+        if (life<=0) {
+          explosion.Play();
+          Destroy(gameObject,explosion.main.duration-0.5f);
+        }
+      }
+    }
+
+    private void OnCollisionExit(Collision other) {
+      if (inCollision) {
+        inCollision = false;
+      }
+    }
 
     // Update is called once per frame
     void Update()
@@ -256,14 +282,16 @@ public class AICarController : MonoBehaviour
       float forwardInput = 0f;
       float sidesInput = 0f;
 
-      if (dot > -overturn) {
+      if (dot > overturn) {
         forwardInput = 1f;
-      } else if (dot < overturn) {
+      } else if (dot < -overturn) {
         if (distanceToTarget > 10f) {
           forwardInput = 1f;
         } else {
           forwardInput = -1f;
         }
+      } else {
+        Brakes();
       }
 
       float angleToDirection = Vector3.SignedAngle(transform.forward, directionToTarget, Vector3.up);
