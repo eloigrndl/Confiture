@@ -5045,7 +5045,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3d5b32e2d719710a49d2eedcbe4c9515, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6023,8 +6023,8 @@ MonoBehaviour:
   building: {fileID: 149315778}
   AICar: {fileID: 235774758}
   player: {fileID: 1683777766}
-  densityBuildings: 100
-  amountCars: 30
+  densityBuildings: 0
+  amountCars: 500
   buildings: []
   AICars: []
 --- !u!1 &1683777766 stripped
