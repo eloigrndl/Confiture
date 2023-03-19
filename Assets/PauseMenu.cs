@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -12,6 +13,13 @@ public class PauseMenu : MonoBehaviour
 
     public AudioSource gameOverAudio;
     public AudioSource soundtrackAudio;
+    public PrometeoCarController playerCar;
+
+    public GameObject winningScreen;
+
+    public GameObject winPoint;
+
+    public bool gameWon = false;
 
     // Update is called once per frame
     void Update()
@@ -23,6 +31,29 @@ public class PauseMenu : MonoBehaviour
             } else {
                 PauseGame();
             }
+        }
+
+        Vector3 pos = playerCar.transform.position;
+
+        double distance = Math.Pow(winPoint.transform.position.x - pos.x, 2) + Math.Pow(winPoint.transform.position.z - pos.z, 2);
+        Debug.Log(distance);
+        if(distance <= 1000){
+            Debug.Log("Game won");
+            Time.timeScale = 0f;
+            winningScreen.SetActive(true); 
+            gameWon = true;
+        }
+
+        if(gameWon && Input.GetKeyDown(KeyCode.R)){
+            RestartGame();
+        }
+
+        if(gameWon && Input.GetKeyDown(KeyCode.Q)){
+            QuitGame();
+        }
+
+        if(gameWon && Input.GetKeyDown(KeyCode.M)){
+            QuitToMenu();
         }
 
         if(Input.GetKeyDown(KeyCode.W) && !GameIsOver){
@@ -52,6 +83,13 @@ public class PauseMenu : MonoBehaviour
         if(GameIsOver && Input.GetKeyDown(KeyCode.R)){
             RestartGame();
         }
+
+
+        if(!GameIsOver && playerCar.life <= 0){
+            GameOver();
+        }
+
+        
     }
 
     public void PauseGame(){
@@ -79,8 +117,10 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void RestartGame(){
+        playerCar.life = 100;
         Debug.Log("Restarting");
         gameOverUI.SetActive(false);
+        winningScreen.SetActive(false);
         Time.timeScale = 1f;
         GameIsOver = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -90,6 +130,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         pauseMenuUI.SetActive(false);
         gameOverUI.SetActive(false);
+        winningScreen.SetActive(false);
         Debug.Log("Changing scene");
         SceneManager.LoadScene("MenuScene");
     }

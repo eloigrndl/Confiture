@@ -16,6 +16,7 @@ public class TitleMenu : MonoBehaviour
 
     public AudioMixer mainMixer;
 
+
     void Update(){
         if(StoryIsShown && Input.GetKeyDown(KeyCode.Space)){
             PlayGame();
@@ -36,6 +37,7 @@ public class TitleMenu : MonoBehaviour
     }
 
     public void PlayGame(){
+        StoryIsShown = false;
         Debug.Log("Starting game");
         MainMenu.SetActive(true);
         StoryCanvas.SetActive(false);

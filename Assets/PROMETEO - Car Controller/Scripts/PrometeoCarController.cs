@@ -22,7 +22,6 @@ public class PrometeoCarController : MonoBehaviour
       public int life = 100; // Life points before game over.
 
       public int carSpeedText;
-
     //CAR SETUP
 
       [Space(10)]
@@ -46,7 +45,7 @@ public class PrometeoCarController : MonoBehaviour
       public int decelerationMultiplier = 2; // How fast the car decelerates when the user is not using the throttle.
       [Range(1, 10)]
       public int handbrakeDriftMultiplier = 5; // How much grip the car loses when the user hit the handbrake.
-      [Range(1f, 10f)]
+      [Range(10f, 100f)]
       public float driftStart = 3f; // When does the car starts to drift.
       [Space(10)]
       public Vector3 bodyMassCenter; // This is a vector that contains the center of mass of the car. I recommend to set this value
@@ -237,9 +236,7 @@ public class PrometeoCarController : MonoBehaviour
       if (!inCollision) {
         inCollision = true;
         life-=carSpeedText/10;
-        if (life<=0) {
-          Debug.Log("GAME OVER");
-        }
+        Debug.Log(life);
       }
     }
 
@@ -644,7 +641,7 @@ public class PrometeoCarController : MonoBehaviour
         }
 
         try{
-          if((isTractionLocked || Mathf.Abs(localVelocityX) > 5f) && Mathf.Abs(carSpeed) > 12f){
+          if((isTractionLocked || Mathf.Abs(localVelocityX) > driftStart) && Mathf.Abs(carSpeed) > driftStart*2){
             RLWTireSkid.emitting = true;
             RRWTireSkid.emitting = true;
           }else {
