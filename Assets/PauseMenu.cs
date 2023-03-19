@@ -17,10 +17,6 @@ public class PauseMenu : MonoBehaviour
     void Update()
     {
 
-        if(SceneManager.GetActiveScene().name == "CarScene" && !GameIsPaused && !GameIsOver){
-            soundtrackAudio.mute = false;
-        }
-
         if(SceneManager.GetActiveScene().name == "CarScene" && Input.GetKeyDown(KeyCode.Escape)){
             if(GameIsPaused){
                 ResumeGame();
@@ -28,6 +24,10 @@ public class PauseMenu : MonoBehaviour
                 PauseGame();
             }
         }
+
+        if(Input.GetKeyDown(KeyCode.W) && !GameIsOver){
+                soundtrackAudio.mute = false;
+            }
 
         if(Input.GetKeyDown(KeyCode.Q) && GameIsPaused){
             QuitGame();
