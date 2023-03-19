@@ -13,6 +13,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Random=UnityEngine.Random;
 
 public class AICarController : MonoBehaviour
 {
@@ -239,11 +240,11 @@ public class AICarController : MonoBehaviour
             RRWTireSkid.emitting = false;
           }
         }
-
+      life = Random.Range(20,60);
     }
 
     bool inCollision = false;
-    int life = 5;
+    int life;
     private void OnCollisionEnter(Collision other) {
       if (!inCollision) {
         inCollision = true;
@@ -354,19 +355,6 @@ public class AICarController : MonoBehaviour
         ResetSteeringAngle();
         RecoverTraction();
       }
-
-      //CAR PHYSICS
-
-      /*
-      The next part is regarding to the car controller. First, it checks if the user wants to use touch controls (for
-      mobile devices) or analog input controls (WASD + Space).
-
-      The following methods are called whenever a certain key is pressed. For example, in the first 'if' we call the
-      method GoForward() if the user has pressed W.
-
-      In this part of the code we specify what the car needs to do if the user presses W (throttle), S (reverse),
-      A (turn left), D (turn right) or Space bar (handbrake).
-      */
 
       // We call the method AnimateWheelMeshes() in order to match the wheel collider movements with the 3D meshes of the wheels.
       AnimateWheelMeshes();

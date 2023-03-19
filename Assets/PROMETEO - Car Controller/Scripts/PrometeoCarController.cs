@@ -16,10 +16,16 @@ using UnityEngine.UI;
 
 public class PrometeoCarController : MonoBehaviour
 {
+    //GAME SETUP
+      [Space(20)]
+      [Range(20, 100)]
+      public int life = 100; // Life points before game over.
+
+      public int carSpeedText;
 
     //CAR SETUP
 
-      [Space(20)]
+      [Space(10)]
       //[Header("CAR SETUP")]
       [Space(10)]
       [Range(20, 300)]
@@ -85,15 +91,6 @@ public class PrometeoCarController : MonoBehaviour
       // The following trail renderers are used as tire skids when the car loses traction.
       public TrailRenderer RLWTireSkid;
       public TrailRenderer RRWTireSkid;
-
-    //SPEED TEXT (UI)
-
-      [Space(20)]
-      //[Header("UI")]
-      [Space(10)]
-      //The following variable lets you to set up a UI text to display the speed of your car.
-      public bool useUI = false;
-      public Text carSpeedText; // Used to store the UI object that is going to show the speed of the car.
 
     //SOUNDS
 
@@ -190,13 +187,6 @@ public class PrometeoCarController : MonoBehaviour
         // We invoke 2 methods inside this script. CarSpeedUI() changes the text of the UI object that stores
         // the speed of the car and CarSounds() controls the engine and drifting sounds. Both methods are invoked
         // in 0 seconds, and repeatedly called every 0.1 seconds.
-        if(useUI){
-          InvokeRepeating("CarSpeedUI", 0f, 0.1f);
-        }else if(!useUI){
-          if(carSpeedText != null){
-            carSpeedText.text = "0";
-          }
-        }
 
         if(useSounds){
           InvokeRepeating("CarSounds", 0f, 0.1f);
@@ -223,7 +213,40 @@ public class PrometeoCarController : MonoBehaviour
             RRWTireSkid.emitting = false;
           }
         }
+        carSpeedText = 0;
+        InvokeRepeating("CarSpeedUI", 0f, 0.1f);
+        lastPosition = transform.position;
+    }
 
+    void OnGUI() {
+      GUI.Label(new Rect(Screen.width-120, Screen.height-100, 100, 100),life.ToString(),new GUIStyle(GUI.skin.label){
+        alignment = TextAnchor.LowerRight,
+        fontSize = 60,
+        fontStyle = FontStyle.Bold
+      });
+      GUI.Label(new Rect(Screen.width-230, Screen.height-110, 100, 100),carSpeedText.ToString(),new GUIStyle(GUI.skin.label){
+        alignment = TextAnchor.LowerRight,
+        fontSize = 40,
+        fontStyle = FontStyle.Bold
+      });
+    }
+
+    bool inCollision = false;
+    
+    private void OnCollisionEnter(Collision other) {
+      if (!inCollision) {
+        inCollision = true;
+        life-=1;
+        if (life<=0) {
+          Debug.Log("GAME OVER");
+        }
+      }
+    }
+
+    private void OnCollisionExit(Collision other) {
+      if (inCollision) {
+        inCollision = false;
+      }
     }
 
     // Update is called once per frame
@@ -292,18 +315,17 @@ public class PrometeoCarController : MonoBehaviour
 
     }
 
+    Vector3 lastPosition;
+
     // This method converts the car speed data from float to string, and then set the text of the UI carSpeedText with this value.
     public void CarSpeedUI(){
-
-      if(useUI){
-          try{
-            float absoluteCarSpeed = Mathf.Abs(carSpeed);
-            carSpeedText.text = Mathf.RoundToInt(absoluteCarSpeed).ToString();
-          }catch(Exception ex){
-            Debug.LogWarning(ex);
-          }
+      try{
+        float absoluteCarSpeed = Mathf.Abs(Vector3.Distance(transform.position,lastPosition)/0.1f);
+        carSpeedText = Mathf.RoundToInt(absoluteCarSpeed*3);
+        lastPosition = transform.position;
+      }catch(Exception ex){
+        Debug.LogWarning(ex);
       }
-
     }
 
     // This method controls the car sounds. For example, the car engine will sound slow when the car speed is low because the

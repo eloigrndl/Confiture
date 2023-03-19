@@ -36,10 +36,10 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets/PROMETEO - Car Controller/Editor/PrometeoEditor.cs" />
-     <Compile Include="Assets/PROMETEO - Car Controller/Editor/AIEditor.cs" />
-     <Compile Include="Assets/UnityTechnologies/ParticlePack/TutorialInfo/Scripts/Editor/ReadmeEditor.cs" />
      <Compile Include="Assets/UnityTechnologies/ParticlePack/Shared/Ramps/Editor/RampAssetEditor.cs" />
+     <Compile Include="Assets/PROMETEO - Car Controller/Editor/PrometeoEditor.cs" />
+     <Compile Include="Assets/UnityTechnologies/ParticlePack/TutorialInfo/Scripts/Editor/ReadmeEditor.cs" />
+     <Compile Include="Assets/PROMETEO - Car Controller/Editor/AIEditor.cs" />
     <Reference Include="UnityEngine">
         <HintPath>/home/kilian/external/Unity/2021.3.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -715,6 +715,9 @@
     <Reference Include="Unity.VSCode.Editor">
         <HintPath>/home/kilian/Projects/PLS_JAM/Confiture/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Postprocessing.Runtime">
+        <HintPath>/home/kilian/Projects/PLS_JAM/Confiture/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualScripting.Shared.Editor">
         <HintPath>/home/kilian/Projects/PLS_JAM/Confiture/Library/ScriptAssemblies/Unity.VisualScripting.Shared.Editor.dll</HintPath>
     </Reference>
@@ -751,8 +754,8 @@
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
         <HintPath>/home/kilian/Projects/PLS_JAM/Confiture/Library/ScriptAssemblies/Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Flow">
-        <HintPath>/home/kilian/Projects/PLS_JAM/Confiture/Library/ScriptAssemblies/Unity.VisualScripting.Flow.dll</HintPath>
+    <Reference Include="Unity.Postprocessing.Editor">
+        <HintPath>/home/kilian/Projects/PLS_JAM/Confiture/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
         <HintPath>/home/kilian/Projects/PLS_JAM/Confiture/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
@@ -769,6 +772,9 @@
     <Reference Include="UnityEngine.UI">
         <HintPath>/home/kilian/Projects/PLS_JAM/Confiture/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.VisualScripting.Flow">
+        <HintPath>/home/kilian/Projects/PLS_JAM/Confiture/Library/ScriptAssemblies/Unity.VisualScripting.Flow.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualScripting.State">
         <HintPath>/home/kilian/Projects/PLS_JAM/Confiture/Library/ScriptAssemblies/Unity.VisualScripting.State.dll</HintPath>
     </Reference>
@@ -777,12 +783,6 @@
     </Reference>
     <Reference Include="Unity.EditorCoroutines.Editor">
         <HintPath>/home/kilian/Projects/PLS_JAM/Confiture/Library/ScriptAssemblies/Unity.EditorCoroutines.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Postprocessing.Editor">
-        <HintPath>/home/kilian/Projects/PLS_JAM/Confiture/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Postprocessing.Runtime">
-        <HintPath>/home/kilian/Projects/PLS_JAM/Confiture/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

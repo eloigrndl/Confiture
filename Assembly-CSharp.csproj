@@ -37,16 +37,16 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets/PROMETEO - Car Controller/Scripts/CameraFollow.cs" />
-     <Compile Include="Assets/PROMETEO - Car Controller/Scripts/AICarController.cs" />
-     <Compile Include="Assets/GenerateFloor.cs" />
-     <Compile Include="Assets/PROMETEO - Car Controller/Scripts/PrometeoCarController.cs" />
+     <Compile Include="Assets/UnityTechnologies/ParticlePack/Shared/Scripts/ProximityActivate.cs" />
      <Compile Include="Assets/UnityTechnologies/ParticlePack/Shared/Ramps/Runtime/RampAsset.cs" />
+     <Compile Include="Assets/UnityTechnologies/ParticlePack/Shared/Scripts/SimpleCameraController.cs" />
      <Compile Include="Assets/UnityTechnologies/ParticlePack/Shared/Scripts/SimpleCharacterMotor.cs" />
      <Compile Include="Assets/UnityTechnologies/ParticlePack/TutorialInfo/Scripts/Readme.cs" />
-     <Compile Include="Assets/UnityTechnologies/ParticlePack/Shared/Scripts/SimpleCameraController.cs" />
-     <Compile Include="Assets/UnityTechnologies/ParticlePack/Shared/Scripts/ProximityActivate.cs" />
-     <Compile Include="Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Scripts/SpawnEffect.cs" />
      <Compile Include="Assets/UnityTechnologies/ParticlePack/Shared/Scripts/AdjustTimeScale.cs" />
+     <Compile Include="Assets/PROMETEO - Car Controller/Scripts/AICarController.cs" />
+     <Compile Include="Assets/UnityTechnologies/ParticlePack/EffectExamples/Misc Effects/Scripts/SpawnEffect.cs" />
+     <Compile Include="Assets/GenerateFloor.cs" />
+     <Compile Include="Assets/PROMETEO - Car Controller/Scripts/PrometeoCarController.cs" />
      <None Include="Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMPro.cginc" />
      <None Include="Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets/UnityTechnologies/ParticlePack/TextMesh Pro/Shaders/TMP_Bitmap.shader" />
@@ -694,6 +694,9 @@
     <Reference Include="Unity.VSCode.Editor">
         <HintPath>/home/kilian/Projects/PLS_JAM/Confiture/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Postprocessing.Runtime">
+        <HintPath>/home/kilian/Projects/PLS_JAM/Confiture/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualScripting.Shared.Editor">
         <HintPath>/home/kilian/Projects/PLS_JAM/Confiture/Library/ScriptAssemblies/Unity.VisualScripting.Shared.Editor.dll</HintPath>
     </Reference>
@@ -730,8 +733,8 @@
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
         <HintPath>/home/kilian/Projects/PLS_JAM/Confiture/Library/ScriptAssemblies/Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Flow">
-        <HintPath>/home/kilian/Projects/PLS_JAM/Confiture/Library/ScriptAssemblies/Unity.VisualScripting.Flow.dll</HintPath>
+    <Reference Include="Unity.Postprocessing.Editor">
+        <HintPath>/home/kilian/Projects/PLS_JAM/Confiture/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
         <HintPath>/home/kilian/Projects/PLS_JAM/Confiture/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
@@ -748,6 +751,9 @@
     <Reference Include="UnityEngine.UI">
         <HintPath>/home/kilian/Projects/PLS_JAM/Confiture/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.VisualScripting.Flow">
+        <HintPath>/home/kilian/Projects/PLS_JAM/Confiture/Library/ScriptAssemblies/Unity.VisualScripting.Flow.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualScripting.State">
         <HintPath>/home/kilian/Projects/PLS_JAM/Confiture/Library/ScriptAssemblies/Unity.VisualScripting.State.dll</HintPath>
     </Reference>
@@ -756,12 +762,6 @@
     </Reference>
     <Reference Include="Unity.EditorCoroutines.Editor">
         <HintPath>/home/kilian/Projects/PLS_JAM/Confiture/Library/ScriptAssemblies/Unity.EditorCoroutines.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Postprocessing.Editor">
-        <HintPath>/home/kilian/Projects/PLS_JAM/Confiture/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Postprocessing.Runtime">
-        <HintPath>/home/kilian/Projects/PLS_JAM/Confiture/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

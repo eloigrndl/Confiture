@@ -13,6 +13,14 @@ public class PrometeoEditor : Editor{
   private SerializedObject SO;
   //
   //
+  //GAME SETUP
+  //
+  //
+  private SerializedProperty life;
+  //
+  //
+  //
+  //
   //CAR SETUP
   //
   //
@@ -69,6 +77,8 @@ public class PrometeoEditor : Editor{
     prometeo = (PrometeoCarController)target;
     SO = new SerializedObject(target);
 
+    life = SO.FindProperty("life");
+
     maxSpeed = SO.FindProperty("maxSpeed");
     maxReverseSpeed = SO.FindProperty("maxReverseSpeed");
     accelerationMultiplier = SO.FindProperty("accelerationMultiplier");
@@ -108,7 +118,18 @@ public class PrometeoEditor : Editor{
 
     SO.Update();
 
-    GUILayout.Space(25);
+    GUILayout.Space(20);
+    GUILayout.Label("GAME SETUP", EditorStyles.boldLabel);
+    GUILayout.Space(10);
+    //
+    //
+    //GAME SETUP
+    //
+    //
+    life.intValue = EditorGUILayout.IntSlider("Life : ",life.intValue,20,100);
+
+
+    GUILayout.Space(15);
     GUILayout.Label("CAR SETUP", EditorStyles.boldLabel);
     GUILayout.Space(10);
     //
@@ -168,23 +189,6 @@ public class PrometeoEditor : Editor{
 
         EditorGUILayout.PropertyField(RLWTireSkid, new GUIContent("Rear Left Trail Renderer: "));
         EditorGUILayout.PropertyField(RRWTireSkid, new GUIContent("Rear Right Trail Renderer: "));
-
-    EditorGUILayout.EndToggleGroup();
-
-    //
-    //
-    //UI
-    //
-    //
-
-    GUILayout.Space(25);
-    GUILayout.Label("UI", EditorStyles.boldLabel);
-    GUILayout.Space(10);
-
-    useUI.boolValue = EditorGUILayout.BeginToggleGroup("Use UI (Speed text)?", useUI.boolValue);
-    GUILayout.Space(10);
-
-        EditorGUILayout.PropertyField(carSpeedText, new GUIContent("Speed Text (UI): "));
 
     EditorGUILayout.EndToggleGroup();
 
