@@ -243,6 +243,8 @@ public class AICarController : MonoBehaviour
       life = Random.Range(10,30);
     }
 
+    int MAX_WIDTH = 500;
+    int MAX_HEIGHT = 500;
     bool inCollision = false;
     int life;
     private void OnCollisionEnter(Collision other) {
@@ -251,9 +253,21 @@ public class AICarController : MonoBehaviour
         life-=1;
         if (life<=0) {
           explosion.Play();
-          Destroy(gameObject,explosion.main.duration-0.5f);
+          Invoke("MoveAICar", explosion.main.duration);
         }
       }
+    }
+
+    void MoveAICar() {
+      float x=0;
+      float z=0;
+
+      do {
+          x = Random.Range(-MAX_WIDTH/2,MAX_WIDTH/2);
+          z = Random.Range(-MAX_HEIGHT/2,MAX_HEIGHT/2);
+      } while(Vector3.Distance(new Vector3(x,0,z),player.transform.position) < 100f);
+
+      transform.position = new Vector3(x,1,z);
     }
 
     private void OnCollisionExit(Collision other) {
